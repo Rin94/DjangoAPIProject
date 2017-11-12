@@ -15,11 +15,16 @@ Including another URLconf
 """
 from django.conf.urls import url
 from django.contrib import admin
-from game.views import ApiDesarrolladora
+from game.views import ApiDesarrolladora, ApiJuego, ApiJuegos2
 
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
     url(r'^api/desarrolladora/$', ApiDesarrolladora.get_all_developers),
     url(r'^api/desarrolladora/new', ApiDesarrolladora.create),
     url(r'^api/desarrolladora/(?P<id>[0-9]+)/$', ApiDesarrolladora.manage_by_id),
+    url(r'^api/juegos/$', ApiJuego.get_games),
+    url(r'^api/juegos/new', ApiJuego.create_game),
+    url(r'^api/games/$', ApiJuegos2.as_view(),name="Api Juegos"),
+
+
 ]

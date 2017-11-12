@@ -7,7 +7,9 @@ class DesarrolladoraSerializer(serializers.ModelSerializer):
         fields = ('id','nombre')
 
 
+
+
 class JuegoSerializer(serializers.ModelSerializer):
     class Meta:
         model = Juego
-        field =('id','nombre','fecha_publicacion','precio', 'desarrolladora')
+        fields =('id','nombre','fecha_publicacion','precio', 'desarrolladora')

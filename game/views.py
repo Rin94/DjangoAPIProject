@@ -79,6 +79,42 @@ class ApiDesarrolladora():
 
 
 
+class ApiJuego():
+
+    @api_view(['POST'])
+    def create_game(request):
+        serializer =JuegoSerializer(data=request.data)
+
+        if serializer.is_valid():
+            serializer.save()
+            return Response("Juego Almacenado", status=status.HTTP_201_CREATED)
+        else:
+            return Response("No se pudo almacenar el juego :( ", status=status.HTTP_400_BAD_REQUEST)
+
+
+    @api_view(['GET'])
+    def get_games(request):
+        juegos= Juego.objects.all()
+        serializer= JuegoSerializer(juegos,many=True)
+        return Response(serializer.data, status=status.HTTP_200_OK)
+
+
+class ApiJuegos2(mixins.ListModelMixin, mixins.CreateModelMixin, generics.GenericAPIView):
+
+    queryset= Juego.objects.all()
+    serializer_class= JuegoSerializer
+
+    def get(self,request,*args,**kwargs):
+        return self.list(request,*args, **kwargs)
+
+    def post(self, request, *args, **kwargs):
+        return self.create(request, *args, **kwargs)
+
+
+
+
+
+
 
 
 
